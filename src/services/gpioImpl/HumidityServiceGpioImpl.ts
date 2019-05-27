@@ -2,6 +2,8 @@ import {Inject, Provides} from 'typescript-ioc';
 import {LoggingService} from '../LoggingService';
 import {HumidityService} from '../HumidityService';
 
+import * as nodeDht from 'node-dht-sensor';
+
 enum SensorType {
     DHT11 = 11,
     DHT22 = 22,
@@ -12,16 +14,14 @@ export class HumidityServiceGpioImpl implements HumidityService {
 
     private pin: number = 3;
     private sensorType: SensorType = SensorType.DHT11;
+    private nodeDhtSensor: any;
 
     @Inject
     loggingService: LoggingService;
 
-    @Inject("node-dht-sensor")
-    nodeDhtSensor: any;
-
     public constructor() {
         this.loggingService.logger.info("Initializing GPIO Humidity Service");
-        this.nodeDhtSensor = this.nodeDhtSensor.promises;
+        this.nodeDhtSensor = nodeDht.promises;
     }
 
     async getHumidity(): Promise<number> {
