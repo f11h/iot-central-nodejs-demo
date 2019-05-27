@@ -7,7 +7,7 @@
     ],
     "target": "es2018",
     "moduleResolution": "node",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "removeComments": true,
     "preserveConstEnums": true,
     "outDir": "./dist",

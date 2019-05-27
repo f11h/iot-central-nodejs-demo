@@ -21,7 +21,7 @@ export class App {
 
     async loop(): Promise<void> {
         this.loggingService.logger.info("Temperatur: " + this.temperatureService.getTemperature());
-        this.loggingService.logger.info("Luftfeuchtigkeit: " + await this.humidityService.getHumidity());
+        this.loggingService.logger.info("Luftfeuchtigkeit: " + (await this.humidityService.getHumidity()).toFixed(1) + "%");
     }
 }
 

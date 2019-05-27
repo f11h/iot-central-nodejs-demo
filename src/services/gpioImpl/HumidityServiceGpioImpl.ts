@@ -2,6 +2,8 @@ import {Inject, Provides} from 'typescript-ioc';
 import {LoggingService} from '../LoggingService';
 import {HumidityService} from '../HumidityService';
 
+// Ignore TypeScript Error on development machines because this lib is not available for non-raspi-systems
+// @ts-ignore
 import * as nodeDht from 'node-dht-sensor';
 
 enum SensorType {
@@ -9,12 +11,16 @@ enum SensorType {
     DHT22 = 22,
 }
 
+interface DhtSensor {
+    read(sensorType: number, pin: number): Promise<{humidity: number, temperature: number}>;
+}
+
 @Provides(HumidityService)
 export class HumidityServiceGpioImpl implements HumidityService {
 
     private pin: number = 3;
     private sensorType: SensorType = SensorType.DHT11;
-    private nodeDhtSensor: any;
+    private nodeDhtSensor: DhtSensor;
 
     @Inject
     loggingService: LoggingService;
