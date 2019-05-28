@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "types": [
+      "types/*.d.ts"
+    ],
     "module": "commonjs",
     "lib": [
       "es2018",
