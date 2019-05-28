@@ -7,7 +7,7 @@ import {promises, SensorType} from 'node-dht-sensor';
 export class HumidityServiceGpioImpl implements HumidityService {
 
     private pin: number = 3;
-    private sensorType: SensorType = SensorType.DHT11;
+    private sensorType: SensorType = 11;
 
     @Inject
     loggingService: LoggingService;

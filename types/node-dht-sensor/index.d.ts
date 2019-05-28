@@ -5,10 +5,7 @@
 
 declare module "node-dht-sensor" {
 
-    export enum SensorType {
-        DHT22 = 22,
-        DHT11 = 11,
-    }
+    export type SensorType = 22 | 11;
 
     export interface SensorData {
         temperature: number;
