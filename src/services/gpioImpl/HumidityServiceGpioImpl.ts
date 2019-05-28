@@ -1,7 +1,7 @@
 import {Inject, Provides} from 'typescript-ioc';
 import {LoggingService} from '../LoggingService';
 import {HumidityService} from '../HumidityService';
-import {promises, SensorType} from '../../../types/node-dht-sensor';
+import {promises, SensorType} from 'node-dht-sensor';
 
 @Provides(HumidityService)
 export class HumidityServiceGpioImpl implements HumidityService {

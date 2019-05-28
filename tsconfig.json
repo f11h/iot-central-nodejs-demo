@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "types": [
-      "types/*.d.ts"
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
     ],
     "module": "commonjs",
     "lib": [
@@ -22,6 +23,7 @@
     "src/**/*"
   ],
   "exclude": [
+    "types",
     "node_modules",
     "**/*.spec.ts"
   ]
