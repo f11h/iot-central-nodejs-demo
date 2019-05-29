@@ -1,13 +1,9 @@
 import {Inject} from 'typescript-ioc';
-import {TemperatureService} from './services/TemperatureService';
 import {LoggingService} from './services/LoggingService';
 import {HumidityService} from './services/HumidityService';
 import {MeasurementSenderService} from './services/MeasurementSenderService';
 
 export class App {
-
-    @Inject
-    temperatureService: TemperatureService;
 
     @Inject
     humidityService: HumidityService;
@@ -25,7 +21,7 @@ export class App {
     }
 
     async loop(): Promise<void> {
-        const temperature: number = this.temperatureService.getTemperature();
+        const temperature: number = await this.humidityService.getTemperature();
         const humidity: number = await this.humidityService.getHumidity();
 
         this.measurementSender.updateTemperature(temperature);

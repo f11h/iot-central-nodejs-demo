@@ -15,4 +15,8 @@ export class HumidityServiceTestImpl implements HumidityService {
     async getHumidity(): Promise<number> {
         return 42.0;
     }
+
+    async getTemperature(): Promise<number> {
+        return 4242.0;
+    }
 }
