@@ -8,4 +8,8 @@ if (process.env.GPIO || process.argv.includes('--gpio')) {
     ContainerConfig.addSource('services/testImpl/*Impl.ts', __dirname);
 }
 
+if (process.env.IOTCENTRAL || process.argv.includes('--iotcentral')) {
+    ContainerConfig.addSource('services/iotCentralImpl/*Impl.ts', __dirname);
+}
+
 Container.get(App).start();

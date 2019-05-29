@@ -22,6 +22,8 @@
     "typescript": "^3.4.5"
   },
   "dependencies": {
+    "azure-iot-device": "^1.9.9",
+    "azure-iot-device-mqtt": "^1.9.9",
     "typescript-ioc": "^1.2.5",
     "winston": "^3.2.1"
   },
