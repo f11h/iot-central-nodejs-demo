@@ -4,6 +4,7 @@ import {clientFromConnectionString} from 'azure-iot-device-mqtt';
 import {Message} from 'azure-iot-common';
 import {Inject, Provides} from 'typescript-ioc';
 import {LoggingService} from '../LoggingService';
+import {LedService} from '../LedService';
 
 @Provides(MeasurementSenderService)
 export class MeasurementSenderServiceIotCentralImpl implements MeasurementSenderService {
@@ -11,14 +12,19 @@ export class MeasurementSenderServiceIotCentralImpl implements MeasurementSender
     @Inject
     private loggingService: LoggingService;
 
+    @Inject
+    private ledService: LedService;
+
     private readonly connectionString: string = 'HostName=iotc-c48dc415-d885-4395-9ffc-a1420db27be0.azure-devices.net;DeviceId=4674cd61-7550-4298-a101-3f07b2f6d3e5;SharedAccessKey=qbHzI6k9P54qtvMqgkgPffGOu097XttwP9QfWIPPIz8=';
     private settings: { [key: string]: any } = {
-        'led': (newValue: boolean, callback: (number, string) => void) => {
-            this.loggingService.logger.info("LED " + newValue);
+        'led': async (newValue: boolean, callback: (value: boolean, status: string) => void) => {
+            this.loggingService.logger.info('LED ' + newValue);
             callback(newValue, 'pending');
-            this.loggingService.logger.info("LED " + newValue + " pending");
+
+            await this.ledService.setLed(newValue);
+
             callback(newValue, 'completed');
-            this.loggingService.logger.info("LED " + newValue + " completed");
+            this.loggingService.logger.info('LED ' + newValue + ' completed');
         }
     };
     private client: Client;
@@ -29,7 +35,7 @@ export class MeasurementSenderServiceIotCentralImpl implements MeasurementSender
     };
 
     public constructor() {
-        this.loggingService.logger.info("Initializing IoT Central");
+        this.loggingService.logger.info('Initializing IoT Central');
         this.client = clientFromConnectionString(this.connectionString);
     }
 
@@ -46,7 +52,7 @@ export class MeasurementSenderServiceIotCentralImpl implements MeasurementSender
     }
 
     private connect(): void {
-        this.loggingService.logger.info("Connecting to IoT Central...");
+        this.loggingService.logger.info('Connecting to IoT Central...');
         this.client.open((err) => {
             if (err) {
                 this.loggingService.logger.info(`Device could not connect to Azure IoT Central: ${err.toString()}`);
