@@ -29,7 +29,7 @@ export class MeasurementSenderServiceIotCentralImpl implements MeasurementSender
     };
     private client: Client;
     private dataToSend: IotCentralData = {
-        temperautre: 0,
+        temperature: 0,
         humidity: 0,
         led: false,
     };
@@ -44,7 +44,7 @@ export class MeasurementSenderServiceIotCentralImpl implements MeasurementSender
     }
 
     public updateTemperature(temperature: number): void {
-        this.dataToSend.temperautre = temperature;
+        this.dataToSend.temperature = temperature;
     }
 
     public updateHumidity(humidity: number): void {
@@ -99,7 +99,7 @@ export class MeasurementSenderServiceIotCentralImpl implements MeasurementSender
 }
 
 interface IotCentralData {
-    temperautre: number,
+    temperature: number,
     humidity: number,
     led: boolean,
 }
